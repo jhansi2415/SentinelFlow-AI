@@ -67,11 +67,3 @@ After the containers start:
 The Python service uses scikit-learn and Isolation Forest to identify unusual application metrics such as response time, HTTP errors, and database failures.
 
 The current model uses generated sample data and is intended for project/demo purposes.
-
-## Future Improvements
-
-- Connect with AWS CloudWatch
-- Add user authentication
-- Add email or SNS alerts
-- Improve the ML model with more application data
-- Add more monitoring metrics
