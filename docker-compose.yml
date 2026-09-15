@@ -1,0 +1,24 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD:-SentinelFlow_Dev_123!}
+    ports: ["1433:1433"]
+
+  ml-service:
+    build: ./ml-service
+    ports: ["8000:8000"]
+
+  api:
+    build: ./backend/SentinelFlow.Api
+    environment:
+      ConnectionStrings__DefaultConnection: ${DB_CONNECTION:-Server=sqlserver,1433;Database=SentinelFlowDb;User Id=sa;Password=SentinelFlow_Dev_123!;TrustServerCertificate=True;Encrypt=False}
+      MlService__Url: ${ML_URL:-http://ml-service:8000}
+    ports: ["8080:8080"]
+    depends_on: [sqlserver, ml-service]
+
+  frontend:
+    build: ./frontend
+    ports: ["4200:80"]
+    depends_on: [api]

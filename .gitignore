@@ -1,0 +1,10 @@
+.env
+**/bin/
+**/obj/
+node_modules/
+dist/
+.angular/
+__pycache__/
+.pytest_cache/
+.vscode/
+.idea/

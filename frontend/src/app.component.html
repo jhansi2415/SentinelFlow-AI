@@ -1,0 +1,8 @@
+<main>
+<header><div><p class="tag">INCIDENT INTELLIGENCE</p><h1>SentinelFlow AI</h1><p>ML-assisted production monitoring and incident correlation.</p></div><button (click)="simulate()" [disabled]="loading">{{loading?'Analyzing...':'Simulate Incident'}}</button></header>
+<section class="stats"><div><b>{{incidents.length}}</b><span>Incidents</span></div><div><b>{{incidents[0]?.severity || '—'}}</b><span>Latest severity</span></div><div><b>{{incidents[0]?.anomalyScore || '—'}}</b><span>Anomaly score</span></div></section>
+<article *ngFor="let i of incidents" class="card"><div class="top"><div><small>INCIDENT #{{i.id}}</small><h2>{{i.title}}</h2></div><strong>{{i.severity}}</strong></div>
+<div class="metrics"><span>Latency <b>{{i.latencyMs}} ms</b></span><span>HTTP 5xx <b>{{i.http5xxRate}}%</b></span><span>DB failures <b>{{i.dbFailures}}</b></span></div>
+<div class="cols"><div><h3>Evidence</h3><ul><li *ngFor="let x of lines(i.evidence)">{{x}}</li></ul></div><div><h3>Suggested investigation</h3><ol><li *ngFor="let x of lines(i.suggestions)">{{x}}</li></ol></div></div></article>
+<p class="empty" *ngIf="!incidents.length">No incidents yet. Use Simulate Incident to generate demo telemetry.</p>
+</main>
